@@ -1,5 +1,7 @@
 const net = require('net');
 const tls = require('tls');
+const ssh2 = require('ssh2');
+const ws = require('ws');
 
 const { parseHeader } = require('./parseHeader');
 
@@ -48,9 +50,34 @@ async function getSSL(port, host) {
 		});
 	});
 }
+/*
 async function getSSH(port, host) {
-	//check if SSH protocol is working
+	return new Promise((resolve, reject) => {
+		const socket = new net.Socket();
+		socket.setTimeout(5000);
+
+		socket.on('data', (data) => {
+			socket.end();
+			resolve(data.toString());
+			console.log(data);
+		});
+		socket.on('connect', () => {
+			socket.end();
+			resolve(true);
+		});
+
+		socket.on('timeout', () => {
+			socket.destroy();
+			resolve(false);
+		});
+
+		socket.on('error', (err) => {
+			resolve(false);
+		});
+		socket.connect(port, host);
+	});
 }
+*/
 
 async function getHTTP(port, host) {
 	return new Promise((resolve) => {
@@ -78,8 +105,27 @@ async function getHTTP(port, host) {
 	});
 }
 
+async function getWS(port, host) {
+	return new Promise((resolve) => {
+		const wsSocket = new ws(`ws://${host}:${port}`);
+		wsSocket.on('open', () => {
+			resolve(true);
+		});
+		wsSocket.on('data', (data) => {
+			resolve(data.toString());
+		});
+		wsSocket.on('error', () => {
+			resolve(false);
+		});
+	});
+}
+
 async function getUniqueProtocol(port, host) {
-	return await Promise.race([getSSL(port, host), getHTTP(port, host)]);
+	return await Promise.race([
+		getSSL(port, host),
+		//getHTTP(port, host),
+		//getSSH(port, host),
+	]);
 }
 
 async function getService(host, port) {
@@ -92,7 +138,7 @@ async function getService(host, port) {
 	}
 	return new Promise(async (resolve) => {
 		const socket = new net.Socket();
-		socket.setTimeout(2000);
+		socket.setTimeout(10000);
 		socket.on('data', (data) => {
 			const banner = data.toString();
 			socket.destroy();
@@ -110,7 +156,7 @@ async function getService(host, port) {
 		});
 
 		socket.connect(port, host, () => {
-			socket.write('\n');
+			socket.write('\r\n');
 			//socket.write('GET / HTTP/1.1\r\n\r\n');
 		});
 	});

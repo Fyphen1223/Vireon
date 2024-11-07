@@ -97,8 +97,8 @@ async function scanPort(host) {
 			target: host,
 			port: shodanPorts,
 			status: 'O',
-			banner: false,
-			timeout: 1500,
+			banner: true,
+			timeout: 10000,
 			concurrency: 65535,
 		};
 		const evilscan = new Evilscan(options);
