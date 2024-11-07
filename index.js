@@ -15,7 +15,6 @@ async function main() {
 			console.log(ports.port, await getService(ip, ports.port));
 		})
 	);
-	console.log('HEI');
 }
 
 main();
