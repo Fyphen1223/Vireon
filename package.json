@@ -1,0 +1,6 @@
+{
+	"dependencies": {
+		"evilscan": "^1.9.1",
+		"geoip-lite": "^1.4.10"
+	}
+}

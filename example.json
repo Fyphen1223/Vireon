@@ -1,0 +1,31 @@
+{
+	"ip": "192.168.11.0",
+	"ports": [80, 443],
+	"services": {
+		"80": {
+			"response": "HTTP/1.1 200 OK",
+			"service": "Apache/2.4.41 (Ubuntu)"
+		},
+		"443": {
+			"response": "HTTP/1.1 200 OK",
+			"service": "Nginx/1.14.0 (Ubuntu)"
+		}
+	},
+	"time": "2021-01-01T00:00:00Z",
+	"location": {
+		"raw": "Tokyo, Japan",
+		"lat": 35.6895,
+		"lon": 139.6917,
+		"city": "Tokyo",
+		"country": "Japan",
+		"region": "Asia",
+		"continent": "Asia",
+		"timezone": "Asia/Tokyo",
+		"postal": "100-0000"
+	},
+	"reverse_dns": "example.com",
+	"whois": {
+		"name": "example",
+		"email": "service@exmaple.com"
+	}
+}
