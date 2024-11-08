@@ -132,7 +132,7 @@ async function getService(host, port) {
 	const isUnique = await getUniqueProtocol(port, host);
 	if (isUnique) {
 		return {
-			header: parseHeader(isUnique),
+			headers: parseHeader(isUnique),
 			raw: trimResponse(isUnique),
 		};
 	}
@@ -156,14 +156,14 @@ async function getService(host, port) {
 		});
 
 		socket.connect(port, host, () => {
-			socket.write('\r\n');
-			//socket.write('GET / HTTP/1.1\r\n\r\n');
+			//socket.write('\r\n');
+			socket.write('GET / HTTP/1.1\r\n\r\n');
 		});
 	});
 }
 
 function trimResponse(response) {
-	return response.substring(0, 2000);
+	return response.substring(0, 3000);
 }
 
 module.exports = { services, getService };

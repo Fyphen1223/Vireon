@@ -1,0 +1,67 @@
+{
+	"ip": "138.2.60.125",
+	"ports": [22, 25, 443, 10000],
+	"service": [
+		{
+			"port": 443,
+			"service": {
+				"headers": {
+					"RateLimit-Policy": "1000;w=900",
+					"RateLimit": "limit=1000, remaining=998, reset=795",
+					"Cross-Origin-Opener-Policy": "same-origin",
+					"Cross-Origin-Resource-Policy": "same-origin",
+					"Origin-Agent-Cluster": "?1",
+					"Referrer-Policy": "no-referrer",
+					"Strict-Transport-Security": "max-age=15552000; includeSubDomains",
+					"X-Content-Type-Options": "nosniff",
+					"X-DNS-Prefetch-Control": "off",
+					"X-Download-Options": "noopen",
+					"X-Frame-Options": "SAMEORIGIN",
+					"X-Permitted-Cross-Domain-Policies": "none",
+					"X-XSS-Protection": "0",
+					"Content-Type": "text/html; charset=utf-8",
+					"Content-Length": "1067",
+					"ETag": "W/\"42b-vKuM0ZYXO4jXUeIph8croWw8zLM\"",
+					"Set-Cookie": "connect.sid=s%3A1BEmp0aoongq2-HxlM5ViQf-YF85aKDd.228xaNZB9nCRJgV2ZXjImBMretvOf0njlQr8RWmQMZw; Path=/; HttpOnly; Secure",
+					"Date": "Fri, 08 Nov 2024 00:26:58 GMT",
+					"Connection": "keep-alive",
+					"Keep-Alive": "timeout=5"
+				},
+				"raw": "HTTP/1.1 200 OK\r\nRateLimit-Policy: 1000;w=900\r\nRateLimit: limit=1000, remaining=998, reset=795\r\nCross-Origin-Opener-Policy: same-origin\r\nCross-Origin-Resource-Policy: same-origin\r\nOrigin-Agent-Cluster: ?1\r\nReferrer-Policy: no-referrer\r\nStrict-Transport-Security: max-age=15552000; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nX-DNS-Prefetch-Control: off\r\nX-Download-Options: noopen\r\nX-Frame-Options: SAMEORIGIN\r\nX-Permitted-Cross-Domain-Policies: none\r\nX-XSS-Protection: 0\r\nContent-Type: text/html; charset=utf-8\r\nContent-Length: 1067\r\nETag: W/\"42b-vKuM0ZYXO4jXUeIph8croWw8zLM\"\r\nSet-Cookie: connect.sid=s%3A1BEmp0aoongq2-HxlM5ViQf-YF85aKDd.228xaNZB9nCRJgV2ZXjImBMretvOf0njlQr8RWmQMZw; Path=/; HttpOnly; Secure\r\nDate: Fri, 08 Nov 2024 00:26:58 GMT\r\nConnection: keep-alive\r\nKeep-Alive: timeout=5\r\n\r\n"
+			}
+		},
+		{
+			"port": 25,
+			"service": {
+				"headers": {
+					"221 2.7.0 Error": "I can break rules, too. Goodbye."
+				},
+				"raw": "220 letsreserve.ddns.net ESMTP Postfix (Ubuntu)\r\n221 2.7.0 Error: I can break rules, too. Goodbye.\r\n"
+			}
+		},
+		{
+			"port": 10000,
+			"service": {
+				"headers": {},
+				"raw": "HTTP/1.0 200 Document follows\r\n"
+			}
+		},
+		{
+			"port": 22,
+			"service": "No response"
+		}
+	],
+	"time": "Fri, 08 Nov 2024 00:27:05 GMT",
+	"whois": "\n#\n# ARIN WHOIS data and services are subject to the Terms of Use\n# available at: https://www.arin.net/resources/registry/whois/tou/\n#\n# If you see inaccuracies in the results, please report at\n# https://www.arin.net/resources/registry/whois/inaccuracy_reporting/\n#\n# Copyright 1997-2024, American Registry for Internet Numbers, Ltd.\n#\n\n\nNetRange:       138.2.0.0 - 138.2.255.255\nCIDR:           138.2.0.0/16\nNetName:        ORACLE-BETH\nNetHandle:      NET-138-2-0-0-1\nParent:         NET138 (NET-138-0-0-0-0)\nNetType:        Direct Allocation\nOriginAS:       \nOrganization:   Oracle Corporation (ORACLE-4-Z)\nRegDate:        1990-01-17\nUpdated:        2021-12-14\nRef:            https://rdap.arin.net/registry/ip/138.2.0.0\n\n\nOrgName:        Oracle Corporation\nOrgId:          ORACLE-4-Z\nAddress:        500 Oracle Parkway\r\nAddress:        Attn:  Domain Administrator\nCity:           Redwood Shores\nStateProv:      CA\nPostalCode:     94065\nCountry:        US\nRegDate:        2013-08-21\nUpdated:        2021-01-13\nRef:            https://rdap.arin.net/registry/entity/ORACLE-4-Z\n\n\nOrgRoutingHandle: ORACL2-ARIN\nOrgRoutingName:   ORACLEROUTING\nOrgRoutingPhone:  +1-800-392-2999 \nOrgRoutingEmail:  network-contact_ww@oracle.com\nOrgRoutingRef:    https://rdap.arin.net/registry/entity/ORACL2-ARIN\n\nOrgAbuseHandle: NISAM-ARIN\nOrgAbuseName:   Network Information Systems Abuse Management\nOrgAbusePhone:  +1-800-633-0738 \nOrgAbuseEmail:  network-contact_ww_grp@oracle.com\nOrgAbuseRef:    https://rdap.arin.net/registry/entity/NISAM-ARIN\n\nOrgTechHandle: ORACL1-ARIN\nOrgTechName:   ORACLE NIS\nOrgTechPhone:  +1-800-633-0738 \nOrgTechEmail:  domain-contact_ww_grp@oracle.com\nOrgTechRef:    https://rdap.arin.net/registry/entity/ORACL1-ARIN\n\n\n#\n# ARIN WHOIS data and services are subject to the Terms of Use\n# available at: https://www.arin.net/resources/registry/whois/tou/\n#\n# If you see inaccuracies in the results, please report at\n# https://www.arin.net/resources/registry/whois/inaccuracy_reporting/\n#\n# Copyright 1997-2024, American Registry for Internet Numbers, Ltd.\n#\n\n",
+	"geo": {
+		"range": [2315395072, 2315403263],
+		"country": "JP",
+		"region": "27",
+		"eu": "0",
+		"timezone": "Asia/Tokyo",
+		"city": "Osaka",
+		"ll": [34.8423, 135.504],
+		"metro": 0,
+		"area": 20
+	}
+}
