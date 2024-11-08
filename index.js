@@ -11,18 +11,11 @@ const { lookupDNS } = require('./util/dns');
 const { formatResult } = require('./util/formatResult');
 
 const { Client } = require('@elastic/elasticsearch');
-const { format } = require('path');
 const client = new Client({
 	node: 'https://localhost:9200',
 	auth: {
 		username: 'elastic',
 		password: config.password,
-		/*
-		apiKey: {
-			id: 'foo',
-			api_key: 'bar',
-		},
-		*/
 	},
 });
 
@@ -80,7 +73,6 @@ async function scan(host) {
 }
 
 async function sub() {
-	//check if indices exist
 	try {
 		indices = await client.cat.indices({ index: 'vireontest' });
 	} catch (err) {
