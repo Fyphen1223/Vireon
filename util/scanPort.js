@@ -1,4 +1,5 @@
 const Evilscan = require('evilscan');
+const dgram = require('dgram');
 
 const shodanPorts = [
 	7, 11, 13, 15, 17, 19, 20, 21, 22, 23, 24, 25, 26, 37, 38, 43, 49, 51, 53, 69, 70, 79,
@@ -110,11 +111,50 @@ async function scanPort(host) {
 			console.log(err.toString());
 			throw new Error(err.toString());
 		});
-		evilscan.on('done', () => {
-			console.log('Scan complete');
+		evilscan.on('done', async () => {
+			result.forEach((element) => {
+				element.protocol = 'tcp';
+			});
+
+			await Promise.all(
+				shodanPorts.map(async (p) => {
+					const udpResult = await scanUDPPort(host, p);
+					if (udpResult) {
+						result.push(udpResult);
+					}
+				})
+			);
+
 			resolve(result);
 		});
 		evilscan.run();
+	});
+}
+
+async function scanUDPPort(host, port) {
+	return new Promise((resolve, reject) => {
+		const socket = dgram.createSocket('udp4');
+		const timer = setTimeout(() => {
+			socket.close();
+			resolve(false);
+		}, 3000);
+		socket.on('message', (msg, rinfo) => {
+			clearTimeout(timer);
+			socket.close();
+			resolve({ ip: host, port, status: 'open', protocol: 'udp' });
+		});
+		socket.on('error', (err) => {
+			clearTimeout(timer);
+			socket.close();
+			resolve();
+		});
+		socket.send('', 0, 0, port, host, (err) => {
+			if (err) {
+				clearTimeout(timer);
+				socket.close();
+				resolve();
+			}
+		});
 	});
 }
 

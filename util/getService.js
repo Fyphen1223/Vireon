@@ -128,12 +128,13 @@ async function getUniqueProtocol(port, host) {
 	]);
 }
 
-async function getService(host, port) {
-	const isUnique = await getUniqueProtocol(port, host);
+async function getService(host, ports) {
+	const isUnique = await getUniqueProtocol(ports.port, host);
 	if (isUnique) {
 		return {
 			headers: parseHeader(isUnique),
 			raw: trimResponse(isUnique),
+			protocol: ports.protocol,
 		};
 	}
 	return new Promise(async (resolve) => {
@@ -142,7 +143,11 @@ async function getService(host, port) {
 		socket.on('data', (data) => {
 			const banner = data.toString();
 			socket.destroy();
-			resolve({ headers: parseHeader(banner), raw: trimResponse(banner) });
+			resolve({
+				headers: parseHeader(banner),
+				raw: trimResponse(banner),
+				protocol: ports.protocol,
+			});
 		});
 
 		socket.on('timeout', () => {
@@ -155,7 +160,7 @@ async function getService(host, port) {
 			resolve('No response');
 		});
 
-		socket.connect(port, host, () => {
+		socket.connect(ports.port, host, () => {
 			//socket.write('\r\n');
 			socket.write('GET / HTTP/1.1\r\n\r\n');
 		});

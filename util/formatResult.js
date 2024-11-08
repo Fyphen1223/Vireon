@@ -1,17 +1,15 @@
-const net = require('net');
-
-const whois = require('whois');
 const geoip = require('geoip-lite');
 
 const { reverseDNS } = require('./dns');
 const { lookupWhois } = require('./whois');
-const { lookup } = require('dns');
 
 async function formatResult(ip, port, service) {
 	let actualports = [];
 	port.forEach((port) => {
 		actualports.push(port.port);
 	});
+	let reversed = await reverseDNS(ip);
+	if (!reversed) reversed = 'No reverse DNS found';
 	return {
 		ip,
 		ports: actualports,
@@ -19,7 +17,7 @@ async function formatResult(ip, port, service) {
 		time: new Date().toUTCString(),
 		whois: await lookupWhois(ip),
 		geo: geoip.lookup(ip),
-		reversedDNS: await reverseDNS(ip),
+		reversedDNS: reversed,
 	};
 }
 
