@@ -152,12 +152,20 @@ async function getService(host, ports) {
 
 		socket.on('timeout', () => {
 			socket.destroy();
-			resolve('No response');
+			resolve({
+				headers: { error: 'No response' },
+				raw: 'No response',
+				protocol: ports.protocol,
+			});
 		});
 
 		socket.on('error', (err) => {
 			socket.destroy();
-			resolve('No response');
+			resolve({
+				headers: { error: 'No response' },
+				raw: 'No response',
+				protocol: ports.protocol,
+			});
 		});
 
 		socket.connect(ports.port, host, () => {

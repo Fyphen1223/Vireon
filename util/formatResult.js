@@ -13,7 +13,7 @@ async function formatResult(ip, port, service) {
 	return {
 		ip,
 		ports: actualports,
-		service,
+		services: service,
 		time: new Date().toUTCString(),
 		whois: await lookupWhois(ip),
 		geo: geoip.lookup(ip),
