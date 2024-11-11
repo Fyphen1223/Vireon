@@ -99,7 +99,7 @@ async function scanPort(host) {
 			port: shodanPorts,
 			status: 'O',
 			banner: true,
-			timeout: 10000,
+			timeout: 3000,
 			concurrency: 65535,
 		};
 		const evilscan = new Evilscan(options);
@@ -109,7 +109,7 @@ async function scanPort(host) {
 		});
 		evilscan.on('error', (err) => {
 			console.log(err.toString());
-			throw new Error(err.toString());
+			return;
 		});
 		evilscan.on('done', async () => {
 			result.forEach((element) => {

@@ -19,33 +19,6 @@ const client = new Client({
 	},
 });
 
-async function main() {
-	const host = 'energy-kyoiku.meti.go.jp';
-	const ip = await lookupDNS(host);
-	if (!ip) {
-		console.log('Invalid host');
-		return;
-	}
-	console.log(`IP address of ${host} is ${ip}`);
-	const result = await scanPort(ip);
-	console.log(result);
-
-	let toBeWritten = [];
-	await Promise.all(
-		result.map(async (ports) => {
-			toBeWritten.push({
-				port: ports.port,
-				service: await getService(ip, ports),
-			});
-		})
-	);
-
-	const finalResult = await formatResult(ip, result, toBeWritten);
-	fs.writeFileSync('output.json', JSON.stringify(finalResult, null, 4));
-}
-
-//main();
-
 async function scan(host) {
 	const ip = await lookupDNS(host);
 	if (!ip) {
@@ -64,11 +37,32 @@ async function scan(host) {
 			});
 		})
 	);
-	console.log(await formatResult(ip, result, toBeWritten));
-	await client.index({
+	const isDuplicate = await client.search({
 		index: 'vireontest',
-		document: await formatResult(ip, result, toBeWritten),
+		body: {
+			query: {
+				match: {
+					ip: ip,
+				},
+			},
+		},
 	});
+	if (isDuplicate.hits.hits.length > 0) {
+		console.log(`Updating index: ${host}`);
+		await client.update({
+			index: 'vireontest',
+			id: isDuplicate.hits.hits[0]._id,
+			body: {
+				doc: await formatResult(ip, result, toBeWritten),
+			},
+		});
+	} else {
+		console.log(`Writing to index: ${host}`);
+		await client.index({
+			index: 'vireontest',
+			document: await formatResult(ip, result, toBeWritten),
+		});
+	}
 	return;
 }
 
@@ -130,7 +124,7 @@ async function sub() {
 							},
 						},
 						reversedDNS: {
-							type: 'keyword',
+							type: 'text',
 						},
 					},
 				},
@@ -138,7 +132,7 @@ async function sub() {
 		});
 	}
 	const ipList = [];
-	for (let i = 0; i < 50; i++) {
+	for (let i = 0; i < 10000; i++) {
 		ipList.push(
 			Math.floor(Math.random() * 256) +
 				'.' +
@@ -150,7 +144,7 @@ async function sub() {
 		);
 	}
 	do {
-		const scanList = ipList.splice(0, 10);
+		const scanList = ipList.splice(0, 50);
 		await Promise.all(scanList.map(async (ip) => await scan(ip)));
 	} while (ipList.length > 0);
 }
@@ -186,10 +180,10 @@ async function test() {
 										type: 'object',
 									},
 									raw: {
-										type: 'keyword',
+										type: 'text',
 									},
 									protocol: {
-										type: 'text',
+										type: 'keyword',
 									},
 								},
 							},
@@ -199,7 +193,7 @@ async function test() {
 						type: 'text',
 					},
 					whois: {
-						type: 'keyword',
+						type: 'text',
 					},
 					geo: {
 						type: 'object',
@@ -234,7 +228,7 @@ async function test() {
 						},
 					},
 					reversedDNS: {
-						type: 'keyword',
+						type: 'text',
 					},
 				},
 			},
@@ -243,24 +237,19 @@ async function test() {
 	await sub();
 }
 //test();
-
 async function search() {
 	const res = await client.search({
 		index: 'vireontest',
 		body: {
 			query: {
-				match_all: {},
+				match: {
+					'services.service.port': 80,
+				},
 			},
 		},
 	});
 
-	const data = await client.get({
-		index: 'vireontest',
-		id: res.hits.hits[0]._id,
-	});
-	//actual data is in data._source
-
-	console.log(data._source);
+	console.log(res.hits.hits.length);
 }
 
 //search();

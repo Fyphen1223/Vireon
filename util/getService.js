@@ -43,7 +43,7 @@ async function getSSL(port, host) {
 			resolve(false);
 		});
 
-		sslSocket.setTimeout(2000);
+		sslSocket.setTimeout(3000);
 		sslSocket.on('timeout', () => {
 			sslSocket.destroy();
 			resolve(false);
@@ -82,7 +82,7 @@ async function getSSH(port, host) {
 async function getHTTP(port, host) {
 	return new Promise((resolve) => {
 		const httpSocket = new net.Socket();
-		httpSocket.setTimeout(2000);
+		httpSocket.setTimeout(3000);
 		httpSocket.on('data', (data) => {
 			const content = data.toString();
 			httpSocket.destroy();
@@ -139,7 +139,7 @@ async function getService(host, ports) {
 	}
 	return new Promise(async (resolve) => {
 		const socket = new net.Socket();
-		socket.setTimeout(10000);
+		socket.setTimeout(3000);
 		socket.on('data', (data) => {
 			const banner = data.toString();
 			socket.destroy();
