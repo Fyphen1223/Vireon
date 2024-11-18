@@ -145,7 +145,15 @@ async function sub() {
 	}
 	do {
 		const scanList = ipList.splice(0, 50);
-		await Promise.all(scanList.map(async (ip) => await scan(ip)));
+		await Promise.all(
+			scanList.map(async (ip) => {
+				try {
+					await scan(ip);
+				} catch (err) {
+					console.log(err);
+				}
+			})
+		);
 	} while (ipList.length > 0);
 }
 

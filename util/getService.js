@@ -176,7 +176,7 @@ async function getService(host, ports) {
 }
 
 function trimResponse(response) {
-	return response.substring(0, 3000);
+	return response.substring(0, 2000);
 }
 
 module.exports = { services, getService };
