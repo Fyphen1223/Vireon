@@ -138,40 +138,48 @@ async function getService(host, ports) {
 		};
 	}
 	return new Promise(async (resolve) => {
-		const socket = new net.Socket();
-		socket.setTimeout(3000);
-		socket.on('data', (data) => {
-			const banner = data.toString();
-			socket.destroy();
-			resolve({
-				headers: parseHeader(banner),
-				raw: trimResponse(banner),
-				protocol: ports.protocol,
+		try {
+			const socket = new net.Socket();
+			socket.setTimeout(3000);
+			socket.on('data', (data) => {
+				const banner = data.toString();
+				socket.destroy();
+				resolve({
+					headers: parseHeader(banner),
+					raw: trimResponse(banner),
+					protocol: ports.protocol,
+				});
 			});
-		});
 
-		socket.on('timeout', () => {
-			socket.destroy();
+			socket.on('timeout', () => {
+				socket.destroy();
+				resolve({
+					headers: { error: 'No response' },
+					raw: 'No response',
+					protocol: ports.protocol,
+				});
+			});
+
+			socket.on('error', (err) => {
+				socket.destroy();
+				resolve({
+					headers: { error: 'No response' },
+					raw: 'No response',
+					protocol: ports.protocol,
+				});
+			});
+
+			socket.connect(ports.port, host, () => {
+				//socket.write('\r\n');
+				socket.write('GET / HTTP/1.1\r\n\r\n');
+			});
+		} catch (err) {
 			resolve({
 				headers: { error: 'No response' },
 				raw: 'No response',
 				protocol: ports.protocol,
 			});
-		});
-
-		socket.on('error', (err) => {
-			socket.destroy();
-			resolve({
-				headers: { error: 'No response' },
-				raw: 'No response',
-				protocol: ports.protocol,
-			});
-		});
-
-		socket.connect(ports.port, host, () => {
-			//socket.write('\r\n');
-			socket.write('GET / HTTP/1.1\r\n\r\n');
-		});
+		}
 	});
 }
 

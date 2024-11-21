@@ -143,12 +143,15 @@ async function sub() {
 				Math.floor(Math.random() * 256)
 		);
 	}
+	let I = 0;
 	do {
-		const scanList = ipList.splice(0, 50);
+		const scanList = ipList.splice(0, 20);
 		await Promise.all(
 			scanList.map(async (ip) => {
 				try {
 					await scan(ip);
+					I++;
+					console.log(`Progress: ${I}/${ipList.length}`);
 				} catch (err) {
 					console.log(err);
 				}
