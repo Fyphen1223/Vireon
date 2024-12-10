@@ -1,5 +1,4 @@
-const Evilscan = require('evilscan');
-const dgram = require('dgram');
+const { nmap } = require('nmapper');
 
 const shodanPorts = [
 	7, 11, 13, 15, 17, 19, 20, 21, 22, 23, 24, 25, 26, 37, 38, 43, 49, 51, 53, 69, 70, 79,
@@ -92,6 +91,7 @@ const shodanPorts = [
 	62078, 64738,
 ];
 
+/*
 async function scanPort(host) {
 	return new Promise((resolve) => {
 		const options = {
@@ -157,5 +157,8 @@ async function scanUDPPort(host, port) {
 		});
 	});
 }
+*/
+
+async function scanPort(host) {}
 
 module.exports = { scanPort };

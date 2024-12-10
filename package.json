@@ -4,6 +4,7 @@
 		"evilscan": "^1.9.1",
 		"geoip-lite": "^1.4.10",
 		"jest": "^29.7.0",
+		"nmapper": "github:Fyphen1223/nmapper",
 		"ssh2": "^1.16.0",
 		"whois": "^2.14.2",
 		"ws": "^8.18.0"
