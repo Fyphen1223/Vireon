@@ -1,11 +1,7 @@
-const net = require('net');
-const tls = require('tls');
-const ssh2 = require('ssh2');
-const ws = require('ws');
+import { parseHeader } from './parseHeader.js';
+console.log();
 
-const { parseHeader } = require('./parseHeader');
-
-const services = {
+export const services = {
 	21: 'FTP',
 	22: 'SSH',
 	23: 'Telnet',
@@ -128,7 +124,7 @@ async function getUniqueProtocol(port, host) {
 	]);
 }
 
-async function getService(host, ports) {
+export async function getService(host, ports) {
 	const isUnique = await getUniqueProtocol(ports.port, host);
 	if (isUnique) {
 		return {
@@ -187,4 +183,4 @@ function trimResponse(response) {
 	return response.substring(0, 2000);
 }
 
-module.exports = { services, getService };
+export default { services, getService };

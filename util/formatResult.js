@@ -1,9 +1,9 @@
-const geoip = require('geoip-lite');
+import * as geoip from 'geoip-lite';
 
-const { reverseDNS } = require('./dns');
-const { lookupWhois } = require('./whois');
+import reverseDNS from './dns.js';
+import lookupWhois from './whois.js';
 
-async function formatResult(ip, port, service) {
+export async function formatResult(ip, port, service) {
 	let actualports = [];
 	port.forEach((port) => {
 		actualports.push(port.port);
@@ -21,4 +21,4 @@ async function formatResult(ip, port, service) {
 	};
 }
 
-module.exports = { formatResult };
+export default { formatResult };

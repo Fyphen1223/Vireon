@@ -1,4 +1,4 @@
-function parseHeader(header) {
+export function parseHeader(header) {
 	const headers = {};
 	const lines = header.split('\r\n');
 
@@ -11,4 +11,4 @@ function parseHeader(header) {
 	return headers;
 }
 
-module.exports = { parseHeader };
+export default { parseHeader };

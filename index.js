@@ -1,16 +1,13 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+import fs from 'fs';
 
-const config = require('./config.json');
+const config = JSON.parse(fs.readFileSync('./config.json'));
 
-const fs = require('fs');
+import { scanPort } from './util/scanPort.js';
+import {getService} from './util/getService.js';
+import {lookupDNS} from './util/dns.js';
+import {formatResult} from './util/formatResult.js';
 
-const { scanPort } = require('./util/scanPort');
-const { getService } = require('./util/getService');
-
-const { lookupDNS } = require('./util/dns');
-const { formatResult } = require('./util/formatResult');
-
-const { Client } = require('@elastic/elasticsearch');
+import { Client } from '@elastic/elasticsearch';
 const client = new Client({
 	node: 'https://localhost:9200',
 	auth: {

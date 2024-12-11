@@ -1,6 +1,6 @@
-const dns = require('dns');
+import dns from 'dns';
 
-async function lookupDNS(host) {
+export async function lookupDNS(host) {
 	return new Promise((resolve) => {
 		dns.lookup(host, (err, address) => {
 			if (err) {
@@ -12,7 +12,7 @@ async function lookupDNS(host) {
 	});
 }
 
-async function reverseDNS(ip) {
+export async function reverseDNS(ip) {
 	return new Promise((resolve) => {
 		dns.reverse(ip, (err, hostnames) => {
 			if (err) {
@@ -24,4 +24,4 @@ async function reverseDNS(ip) {
 	});
 }
 
-module.exports = { lookupDNS, reverseDNS };
+export default { lookupDNS, reverseDNS };

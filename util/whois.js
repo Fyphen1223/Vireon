@@ -1,6 +1,6 @@
-const whois = require('whois');
+import whois from 'whois';
 
-async function lookupWhois(host) {
+export async function lookupWhois(host) {
 	return new Promise((resolve, reject) => {
 		whois.lookup(host, function (err, data) {
 			if (err) reject(err);
@@ -9,4 +9,4 @@ async function lookupWhois(host) {
 	});
 }
 
-module.exports = { lookupWhois };
+export default { lookupWhois };

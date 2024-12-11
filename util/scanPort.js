@@ -1,4 +1,4 @@
-const { nmap } = require('nmapper');
+import nmap from 'nmapper';
 
 const shodanPorts = [
 	7, 11, 13, 15, 17, 19, 20, 21, 22, 23, 24, 25, 26, 37, 38, 43, 49, 51, 53, 69, 70, 79,
@@ -159,6 +159,18 @@ async function scanUDPPort(host, port) {
 }
 */
 
-async function scanPort(host) {}
+export async function scanPort(host) {
+	return await nmap.scanPort(host, [
+		'-sS',
+		'-A',
+		'-p',
+		shodanPorts.join(','),
+		'-T4',
+		'--script=whois-ip',
+		'--script=whois-domain',
+		'--script=ssl-cert',
+		'--script=asn-query',
+	]);
+}
 
-module.exports = { scanPort };
+export default { scanPort };
