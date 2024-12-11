@@ -160,7 +160,7 @@ async function scanUDPPort(host, port) {
 */
 
 export async function scanPort(host) {
-	return await nmap.scanPort(host, [
+	return await nmap.scan(host, [
 		'-sS',
 		'-A',
 		'-p',

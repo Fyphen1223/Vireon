@@ -3,9 +3,9 @@ import fs from 'fs';
 const config = JSON.parse(fs.readFileSync('./config.json'));
 
 import { scanPort } from './util/scanPort.js';
-import {getService} from './util/getService.js';
-import {lookupDNS} from './util/dns.js';
-import {formatResult} from './util/formatResult.js';
+import { getService } from './util/getService.js';
+import { lookupDNS } from './util/dns.js';
+import { formatResult } from './util/formatResult.js';
 
 import { Client } from '@elastic/elasticsearch';
 const client = new Client({

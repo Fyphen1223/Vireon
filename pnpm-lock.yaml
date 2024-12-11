@@ -22,7 +22,7 @@ importers:
         version: 29.7.0(@types/node@22.10.1)
       nmapper:
         specifier: github:Fyphen1223/nmapper
-        version: https://codeload.github.com/Fyphen1223/nmapper/tar.gz/018b5f822df5e79a92c55e2fd76f00137ae447f8
+        version: https://codeload.github.com/Fyphen1223/nmapper/tar.gz/44a79c5af3082597f749fff0fdcb50741d5bdd74
       ssh2:
         specifier: ^1.16.0
         version: 1.16.0
@@ -1195,15 +1195,15 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  nmapper@https://codeload.github.com/Fyphen1223/nmapper/tar.gz/018b5f822df5e79a92c55e2fd76f00137ae447f8:
-    resolution: {tarball: https://codeload.github.com/Fyphen1223/nmapper/tar.gz/018b5f822df5e79a92c55e2fd76f00137ae447f8}
+  nmapper@https://codeload.github.com/Fyphen1223/nmapper/tar.gz/44a79c5af3082597f749fff0fdcb50741d5bdd74:
+    resolution: {tarball: https://codeload.github.com/Fyphen1223/nmapper/tar.gz/44a79c5af3082597f749fff0fdcb50741d5bdd74}
     version: 0.0.1
 
   node-int64@0.4.0:
     resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
 
-  node-releases@2.0.18:
-    resolution: {integrity: sha512-d9VeXT4SJ7ZeOqGX6R5EM022wpL+eWPooLI+5UpWn2jCT1aosUQEhQP214x33Wkwx3JQMvIm+tIoVOdodFS40g==}
+  node-releases@2.0.19:
+    resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
@@ -2276,7 +2276,7 @@ snapshots:
     dependencies:
       caniuse-lite: 1.0.30001687
       electron-to-chromium: 1.5.72
-      node-releases: 2.0.18
+      node-releases: 2.0.19
       update-browserslist-db: 1.1.1(browserslist@4.24.2)
 
   bser@2.1.1:
@@ -3108,7 +3108,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  nmapper@https://codeload.github.com/Fyphen1223/nmapper/tar.gz/018b5f822df5e79a92c55e2fd76f00137ae447f8:
+  nmapper@https://codeload.github.com/Fyphen1223/nmapper/tar.gz/44a79c5af3082597f749fff0fdcb50741d5bdd74:
     dependencies:
       eslint: 9.16.0
       xml2js: 0.6.2
@@ -3118,7 +3118,7 @@ snapshots:
 
   node-int64@0.4.0: {}
 
-  node-releases@2.0.18: {}
+  node-releases@2.0.19: {}
 
   normalize-path@3.0.0: {}
 

@@ -1,5 +1,4 @@
 import { parseHeader } from './parseHeader.js';
-console.log();
 
 export const services = {
 	21: 'FTP',
